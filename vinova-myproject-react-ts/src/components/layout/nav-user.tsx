@@ -22,6 +22,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useNavigate } from "react-router-dom"
+import { useLogout } from "@/hooks/use-auth"
 
 export function NavUser({
   user,
@@ -32,7 +34,11 @@ export function NavUser({
     avatar: string
   }
 }) {
+
+  
   const { isMobile } = useSidebar()
+  const { logout } = useLogout();
+
 
   return (
     <SidebarMenu>
@@ -57,7 +63,7 @@ export function NavUser({
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
             side={isMobile ? "bottom" : "right"}
             align="end"
-            sideOffset={4}  
+            sideOffset={4}
           >
             <DropdownMenuGroup>
               <DropdownMenuItem>
@@ -65,7 +71,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={logout}>
                 Log out
               </DropdownMenuItem>
             </DropdownMenuGroup>
